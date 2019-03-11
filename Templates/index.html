@@ -20,15 +20,15 @@
     <div class="row" id="mars_news">
       <div class="col-md-12">
         <h2>Latest Mars News</h2>
-        <h3>{{mars.mars_title}}</h3>
-        <p>{{mars.mars_p}}</p>
+        <h3>{{mars.title}}</h3>
+        <p>{{mars.paragraphs}}</p>
       </div>
     </div>
 
-    <div class ="row" id="mars-image">
+    <div class ="row" id="featured_image">
       <div class = "col-md-8">
         <h3>Featured Mars Image</h3>
-        <img src = "{{mars.feat_img_url}}" alt ="Mars Image" style = "width:100%">
+        <img src = "{{mars.featured_image_url}}" alt ="Mars Image" style = "width:100%">
       </div>
 
       <div class = "col-md-4">
@@ -36,18 +36,18 @@
         <p>{{mars.mars_weather}}</p>
         <br>
         <h3>Mars Facts</h3>
-        <p>{{mars.facts_table | safe}}</p>
+        <p>{{mars.facts_html_table}}</p>
       </div>
     </div>
 
     <div class ="row" id="mars-hemispheres">
       <div class = "col-md-12">
         <h3><center>Mars Hemispheres</center></h3>
-          {% for hemispheres in mars.hemisphere_images%}
+          {% for hemispheres in mars.hemisphereImages%}
             <div class = "col-md-6">
               <div class = "thumbnail">
-                <img src = "{{hemi.img_url}}">
-                  <h3>{{hemispheres.title}}</h3>
+                <img src = "{{mars.hemisphereImages.img_url}}">
+                  <h3>{{mars.hemisphereImages.title}}</h3>
               </div>
             </div>
           {% endfor %}

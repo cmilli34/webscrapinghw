@@ -17,8 +17,8 @@ def scrape():
     
     # Run the functions below and store into a dictionary
     results = {
-        "title": first_title,
-        "paragraph": first_paragraph,
+        "title": title,
+        "paragraph": paragraph,
         "image_URL": featured_image(browser),
         "weather": mars_weather(browser),
         "facts": mars_facts(),
@@ -29,7 +29,7 @@ def scrape():
     browser.quit()
     return results
 
-def mars_news():
+
     #read html file into jupyter
     filepath = os.path.join('nasa.html')
     with open(filepath) as file:
@@ -57,9 +57,6 @@ def mars_news():
     for paragraph in paragraphs:
         print(paragraphs)
 
-    return title, paragraph
-
-def featured_image(browser):
     # ### PL Mars Space Images - Featured Image
 
 
@@ -96,10 +93,6 @@ def featured_image(browser):
 
     featured_image_url = "https://www.jpl.nasa.gov" + image_path
 
-    return featured_image_url
-
-
-def mars_weather(browser):
     # ### Mars Weather
 
     #get mars weather twitter
@@ -110,10 +103,6 @@ def mars_weather(browser):
 
 
     mars_weather = mars_weather_pull[0].text
-
-    return mars_weather
-
-def mars_facts():
 
     # ### Mars Facts
 
@@ -135,9 +124,7 @@ def mars_facts():
 
     facts_html = mars_facts.to_html()
     facts_html_table = facts_html.replace("\n", "")
-    return facts_html
 
-def hemispheres(browser):
 
     # ### Mars Hemispheres
 
@@ -182,4 +169,16 @@ def hemispheres(browser):
         hemisphereImages.append({"title" : title, "img_url" : img_url})
         
 
-    return hemisphereImages
+        mars_dict = {
+        "Title": title,
+        "Paragraph": paragraphs,
+        "Featured Image": featured_image_url,
+        "Mars Weather": mars_weather,
+        "Facts": facts_html_table,
+        "Hemisphere Images": hemisphereImages }
+
+    return mars_dict
+
+    if __name__  ==  "__main__":
+        print(scrape())
+
