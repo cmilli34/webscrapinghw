@@ -9,12 +9,15 @@ app = Flask(__name__)
 conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
 
-mars_data = {}
+db = client.marsDB
 
 @app.route("/")
 
 def index():
-    mars = mongo.db.mars.find_one()
+    mars_data = {}
+    mars = db.mars.find()
+    print(scrape_mars.scrape())
+    print("$$$$$$$$$$$$$$$$$")
     return render_template("index.html", mars = mars)
 
 

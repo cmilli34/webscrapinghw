@@ -8,28 +8,22 @@ import time
 
 
 def scrape():
-
-    executable_path = {'executable_path': 'chromedriver.exe'}
+    executable_path = {'executable_path': 'chromedriver'}
     browser = Browser('chrome', **executable_path, headless=True)
     
     # Run the function below:
-    title, paragraph = mars_news()
-    
-    # Run the functions below and store into a dictionary
-    results = {
-        "title": title,
-        "paragraph": paragraph,
-        "image_URL": featured_image(browser),
-        "weather": mars_weather(browser),
-        "facts": mars_facts(),
-        "hemispheres": hemispheres(browser),
-    }
+        mars_dict = {
+        "Title": title,
+        "Paragraph": paragraphs,
+        "Featured Image": featured_image_url(browser),
+        "Mars Weather": mars_weather(),
+        "Facts": facts_html_table,
+        "Hemisphere Images": hemisphereImages(browser) }
 
-    # Quit the browser and return the scraped results
-    browser.quit()
-    return results
+        browser.quit()
+    return mars_dict
 
-
+def mars_news():
     #read html file into jupyter
     filepath = os.path.join('nasa.html')
     with open(filepath) as file:
@@ -49,7 +43,6 @@ def scrape():
 
     # Extract title text
     title = mars.title.text
-    print(title)
 
 
     # Print all paragraph texts
@@ -57,6 +50,10 @@ def scrape():
     for paragraph in paragraphs:
         print(paragraphs)
 
+    return title, paragraphs
+
+
+def mars_image(browser):
     # ### PL Mars Space Images - Featured Image
 
 
@@ -68,7 +65,8 @@ def scrape():
 
     get_ipython().system(' which chromedriver')
 
-    executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
+    # executable_path = {'executable_path': '~/usr/local/bin/chromedriver'}
+    executable_path = {'executable_path': '/'}
     browser = Browser('chrome', **executable_path, headless = False)
 
 
@@ -93,6 +91,9 @@ def scrape():
 
     featured_image_url = "https://www.jpl.nasa.gov" + image_path
 
+    return featured_image_url
+
+def mars_weather():
     # ### Mars Weather
 
     #get mars weather twitter
@@ -124,8 +125,10 @@ def scrape():
 
     facts_html = mars_facts.to_html()
     facts_html_table = facts_html.replace("\n", "")
+    return facts_html_table
 
 
+def hemispheres(broswer):
     # ### Mars Hemispheres
 
 
@@ -167,18 +170,5 @@ def scrape():
         img_url = hemispheres_main_url + soup.find('img', class_='wide-image')['src']
         
         hemisphereImages.append({"title" : title, "img_url" : img_url})
-        
-
-        mars_dict = {
-        "Title": title,
-        "Paragraph": paragraphs,
-        "Featured Image": featured_image_url,
-        "Mars Weather": mars_weather,
-        "Facts": facts_html_table,
-        "Hemisphere Images": hemisphereImages }
-
-    return mars_dict
-
-    if __name__  ==  "__main__":
-        print(scrape())
+        return hemisphereImages
 
