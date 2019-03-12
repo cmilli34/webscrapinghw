@@ -12,15 +12,15 @@ def scrape():
     browser = Browser('chrome', **executable_path, headless=True)
     
     # Run the function below:
-        mars_dict = {
-        "Title": title,
-        "Paragraph": paragraphs,
-        "Featured Image": featured_image_url(browser),
-        "Mars Weather": mars_weather(),
-        "Facts": facts_html_table,
-        "Hemisphere Images": hemisphereImages(browser) }
+    mars_dict = {
+    "Title": title,
+    "Paragraph": paragraphs,
+    "Featured Image": featured_image_url(browser),
+    "Mars Weather": mars_weather(),
+    "Facts": facts_html_table,
+    "Hemisphere Images": hemisphereImages(browser) }
 
-        browser.quit()
+    browser.quit()
     return mars_dict
 
 def mars_news():
@@ -170,5 +170,5 @@ def hemispheres(broswer):
         img_url = hemispheres_main_url + soup.find('img', class_='wide-image')['src']
         
         hemisphereImages.append({"title" : title, "img_url" : img_url})
-        return hemisphereImages
+    return hemisphereImages
 
