@@ -1,5 +1,5 @@
 
-from flask import Flask, render_template, redirect
+import Flask
 import pymongo
 import scrape_mars
 
