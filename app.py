@@ -12,7 +12,7 @@ db = client.marsDB
 
 @app.route("/")
 def index():
-    mars = db.mars.find.one()
+    mars = db.mars.find()
     return render_template("index.html", mars = mars)
 
 
